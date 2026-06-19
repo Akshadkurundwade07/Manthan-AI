@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -32,20 +32,20 @@ api.interceptors.response.use(
 );
 
 export const authAPI = {
-  register: (data) => api.post('/register', data),
-  login: (data) => api.post('/login', data),
+  register: (data) => api.post('/api/register', data),
+  login: (data) => api.post('/api/login', data),
 };
 
 export const profileAPI = {
-  getProfile: () => api.get('/profile'),
-  updateProfile: (data) => api.put('/profile', data),
+  getProfile: () => api.get('/api/profile'),
+  updateProfile: (data) => api.put('/api/profile', data),
 };
 
 export const essayAPI = {
-  evaluate: (data) => api.post('/essays/evaluate', data),
-  getAll: () => api.get('/essays'),
-  getOne: (id) => api.get(`/essays/${id}`),
-  delete: (id) => api.delete(`/essays/${id}`),
+  evaluate: (data) => api.post('/api/essays/evaluate', data),
+  getAll: () => api.get('/api/essays'),
+  getOne: (id) => api.get(`/api/essays/${id}`),
+  delete: (id) => api.delete(`/api/essays/${id}`),
 };
 
 export default api;
